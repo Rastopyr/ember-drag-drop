@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   isDraggable: true,
   dragReady: true,
   isSortable: false,
+  showSourceObject: false,
   sortingScope: 'drag-objects',
   title: Ember.computed.alias('content.title'),
 
@@ -122,7 +123,10 @@ export default Ember.Component.extend({
   },
 
   dragStartHook(event) {
-    Ember.$(event.target).css('opacity', '0.5');
+    const showSourceObject = this.get('showSourceObject');
+    const opacity = showSourceObject ? '0.5' : '0';
+
+    Ember.$(event.target).css('opacity', opacity);
   },
 
   dragEndHook(event) {
